@@ -40,59 +40,21 @@ public class MainActivity extends AppCompatActivity {
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Student> call = null; //ToDo
-                call.enqueue(new Callback<Student>() {
-                    @Override
-                    public void onResponse(Call<Student> call, Response<Student> response) {
-                        //ToDo
-                    }
-
-                    @Override
-                    public void onFailure(Call<Student> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
+            //ToDo
             }
         });
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Student> call = null; //ToDo
-                call.enqueue(new Callback<Student>() {
-                    @Override
-                    public void onResponse(Call<Student> call, Response<Student> response) {
-                        //ToDo
-                    }
-
-                    @Override
-                    public void onFailure(Call<Student> call, Throwable t) {
-                        //ToDo
-                        t.printStackTrace();
-
-                    }
-                });
+              //ToDo
             }
         });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Student> call = null; //ToDo
-
-                call.enqueue(new Callback<Student>() {
-                    @Override
-                    public void onResponse(Call<Student> call, Response<Student> response) {
-                        //ToDo
-                    }
-
-                    @Override
-                    public void onFailure(Call<Student> call, Throwable t) {
-                        //ToDo
-                        t.printStackTrace();
-
-                    }
-                });
+         //ToDo
             }
         });
     }
