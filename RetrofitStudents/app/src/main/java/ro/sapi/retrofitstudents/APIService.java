@@ -13,5 +13,18 @@ import retrofit2.http.Path;
 
 public interface APIService {
 
- 
+ @GET("students/{id}")
+ Call<Student> getStudent(@Path("id") int id);
+
+ @DELETE("students/{id}")
+ public Call<Student> deleteStudentWithID(@Path("id") int id);
+
+ //Insert new student
+ @FormUrlEncoded
+ @POST("students")
+ public Call<Student> createStudent(
+         //@Field("program_id") Integer program_id,
+         @Field("name") String name,
+         @Field("email") String email);
+
 }

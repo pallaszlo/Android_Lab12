@@ -45,6 +45,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = editTextPassword.getText().toString().trim();
 
         APIService service = RetrofitClient.getRetrofitInstance().create(APIService.class);
-        //ToDo
+        Call<Result> call = service.userLogin(email, password);
+        call.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                progressDialog.dismiss();
+                if (!response.body().getError()) {
+                    //finish();
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                progressDialog.dismiss();
+                Log.d("Hiba", t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

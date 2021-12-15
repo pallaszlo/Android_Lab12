@@ -45,7 +45,20 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         String password = editTextPassword.getText().toString().trim();
 
         APIService service = RetrofitClient.getRetrofitInstance().create(APIService.class);
-        //ToDo
+        Call<Result> call = service.createUser(name, email, password);
+        call.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 }

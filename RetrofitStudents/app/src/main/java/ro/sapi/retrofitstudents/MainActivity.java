@@ -2,6 +2,7 @@ package ro.sapi.retrofitstudents;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,21 +41,57 @@ public class MainActivity extends AppCompatActivity {
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //ToDo
+                Call<Student> call = service.getStudent(Integer.parseInt(editID.getText().toString()));
+                call.enqueue(new Callback<Student>() {
+                    @Override
+                    public void onResponse(Call<Student> call, Response<Student> response) {
+                        Student std = response.body();
+                        name.setText(std.getName());
+                        email.setText(std.getEmail());
+                        Log.d("student", std.getName());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Student> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
             }
         });
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //ToDo
+              Call<Student> call = service.deleteStudentWithID(Integer.parseInt(editID.getText().toString()));
+              call.enqueue(new Callback<Student>() {
+                  @Override
+                  public void onResponse(Call<Student> call, Response<Student> response) {
+                      Toast.makeText(MainActivity.this, "Sikeres torles!", Toast.LENGTH_SHORT).show();
+                  }
+
+                  @Override
+                  public void onFailure(Call<Student> call, Throwable t) {
+
+                  }
+              });
             }
         });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-         //ToDo
+            Call<Student> call = service.createStudent(editName.getText().toString(), editEmail.getText().toString());
+            call.enqueue(new Callback<Student>() {
+                @Override
+                public void onResponse(Call<Student> call, Response<Student> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<Student> call, Throwable t) {
+
+                }
+            });
             }
         });
     }
